@@ -43,7 +43,7 @@ public class LibraryCard {
      */
     public void borrowBook() {
         if (booksCount >= MAX_BOOKS) {
-            System.out.println("Ошибка: достигнут лимит одновременно выданных книг (" + MAX_BOOKS + ")");
+            System.out.println("Не могу выдать книгу - лимит уже достигнут (" + MAX_BOOKS + " шт.)");
             return;
         }
         booksCount++;
@@ -69,19 +69,19 @@ public class LibraryCard {
 
         System.out.println("Абонемент: " + card.getCardNumber() + ", владелец: " + card.getOwnerName());
 
-        // Берём 5 книг подряд — все должны пройти успешно
-        for (int i = 1; i <= 5; i++) {
+        // берем 5 книг подряд, все должны пройти без ошибок
+        for (int j = 1; j <= 5; j++) {
             card.borrowBook();
         }
 
-        // Пытаемся взять 6-ю книгу — должна сработать проверка лимита
+        // а вот тут уже перебор - лимит сработает
         card.borrowBook();
 
-        // Возвращаем 2 книги
+        // сдаем 2 книги обратно
         card.returnBook();
         card.returnBook();
 
-        // Итоговое количество книг на руках
+        // ну и смотрим что в итоге осталось на руках
         System.out.println("Итоговое количество книг на руках: " + card.getBooksCount());
     }
 }
