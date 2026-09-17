@@ -1,4 +1,3 @@
-```java
 /**
  * Практическое задание 1. Разработка базового класса и инкапсуляция
  * Вариант 11: LibraryCard (Библиотечный абонемент)
@@ -9,127 +8,81 @@
 
 public class LibraryCard {
 
-    // Приватные поля класса
+    // Шаг 1. Приватные поля класса
     private String cardNumber;
     private String ownerName;
     private int booksCount;
 
-    // Максимальное количество книг, которое можно взять
+    // Максимально допустимое количество книг на руках
     private static final int MAX_BOOKS = 5;
 
-    // Конструктор
+    // Шаг 2. Конструктор
     public LibraryCard(String cardNumber, String ownerName) {
         this.cardNumber = cardNumber;
         this.ownerName = ownerName;
-        this.booksCount = 0;
+        this.booksCount = 0; // по умолчанию книг на руках нет
     }
 
-    // Геттер для количества книг
+    // Шаг 3. Методы (инкапсуляция)
+
+    // Геттер — доступ только на чтение
     public int getBooksCount() {
         return booksCount;
     }
 
-    // Геттер для имени владельца
     public String getOwnerName() {
         return ownerName;
     }
 
-    // Геттер для номера абонемента
     public String getCardNumber() {
         return cardNumber;
     }
 
-    // Метод для выдачи книги
+    /**
+     * Взять книгу — увеличивает счётчик книг на 1.
+     * Валидация: нельзя превышать MAX_BOOKS одновременно выданных книг.
+     */
     public void borrowBook() {
         if (booksCount >= MAX_BOOKS) {
-            System.out.println(
-                "Не могу выдать книгу - лимит уже достигнут (" 
-                + MAX_BOOKS + " шт.)"
-            );
+            System.out.println("Не могу выдать книгу - лимит уже достигнут (" + MAX_BOOKS + " шт.)");
             return;
         }
-
         booksCount++;
-
-        System.out.println(
-            "Книга выдана. Сейчас на руках: " 
-            + booksCount + " кн."
-        );
+        System.out.println("Книга выдана. Сейчас на руках: " + booksCount + " кн.");
     }
 
-    // Метод для возврата книги
+    /**
+     * Вернуть книгу — уменьшает счётчик книг на 1.
+     * Валидация: нельзя вернуть книгу, если на руках их нет.
+     */
     public void returnBook() {
         if (booksCount <= 0) {
             System.out.println("Ошибка: нет книг для возврата");
             return;
         }
-
         booksCount--;
-
-        System.out.println(
-            "Книга возвращена. Сейчас на руках: " 
-            + booksCount + " кн."
-        );
+        System.out.println("Книга возвращена. Сейчас на руках: " + booksCount + " кн.");
     }
 
-    // Проверка работы программы
+    // Шаг 4. Проверка работы
     public static void main(String[] args) {
+        LibraryCard card = new LibraryCard("LC-001", "Аманов Самат");
 
-        // Настраиваем вывод в UTF-8 для русского текста
-        System.setOut(
-            new java.io.PrintStream(
-                new java.io.BufferedOutputStream(System.out),
-                true,
-                java.nio.charset.StandardCharsets.UTF_8
-            )
-        );
+        System.out.println("Абонемент: " + card.getCardNumber() + ", владелец: " + card.getOwnerName());
 
-        // Создаём библиотечный абонемент
-        LibraryCard card = new LibraryCard(
-            "LC-001",
-            "Аманов Самат"
-        );
-
-        // Выводим информацию об абонементе
-        System.out.println(
-            "Абонемент: " 
-            + card.getCardNumber() 
-            + ", владелец: " 
-            + card.getOwnerName()
-        );
-
-        // Берём 5 книг подряд
+        // берем 5 книг подряд, все должны пройти без ошибок
         for (int j = 1; j <= 5; j++) {
             card.borrowBook();
         }
 
-        // Пытаемся взять шестую книгу
-        // Должно появиться сообщение об ошибке
+        // а вот тут уже перебор - лимит сработает
         card.borrowBook();
 
-        // Возвращаем 2 книги
+        // сдаем 2 книги обратно
         card.returnBook();
         card.returnBook();
 
-        // Выводим итоговое количество книг
-        System.out.println(
-            "Итоговое количество книг на руках: " 
-            + card.getBooksCount()
-        );
+        // ну и смотрим что в итоге осталось на руках
+        System.out.println("Итоговое количество книг на руках: " + card.getBooksCount());
     }
 }
-```
-
-После сохранения в PowerShell выполни:
-
-```powershell
-javac -encoding UTF-8 LibraryCard.java
-```
-
-потом:
-
-```powershell
-java LibraryCard
-```
-
-**Важно:** `java .\LibraryCard.java` сейчас не используй — запускай именно `java LibraryCard`.
