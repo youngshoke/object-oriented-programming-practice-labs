@@ -1,31 +1,22 @@
-/**
- * Практическое задание 1. Разработка базового класса и инкапсуляция
- * Вариант 11: LibraryCard (Библиотечный абонемент)
- *
- * Учёт количества взятых книг с ограничением на максимальное число
- * одновременно выданных книг (не более 5).
- */
 
 public class LibraryCard {
 
-    // Шаг 1. Приватные поля класса
+    // Shag 1. Privatnye polya klassa
     private String cardNumber;
     private String ownerName;
     private int booksCount;
 
-    // Максимально допустимое количество книг на руках
+   
     private static final int MAX_BOOKS = 5;
 
-    // Шаг 2. Конструктор
+
     public LibraryCard(String cardNumber, String ownerName) {
         this.cardNumber = cardNumber;
         this.ownerName = ownerName;
-        this.booksCount = 0; // по умолчанию книг на руках нет
+        this.booksCount = 0;
     }
 
-    // Шаг 3. Методы (инкапсуляция)
-
-    // Геттер — доступ только на чтение
+   //only read
     public int getBooksCount() {
         return booksCount;
     }
@@ -38,51 +29,45 @@ public class LibraryCard {
         return cardNumber;
     }
 
-    /**
-     * Взять книгу — увеличивает счётчик книг на 1.
-     * Валидация: нельзя превышать MAX_BOOKS одновременно выданных книг.
-     */
+    
     public void borrowBook() {
         if (booksCount >= MAX_BOOKS) {
-            System.out.println("Не могу выдать книгу - лимит уже достигнут (" + MAX_BOOKS + " шт.)");
+            System.out.println("Ne mogu vydat knigu - limit uzhe dostignut (" + MAX_BOOKS + " sht.)");
             return;
         }
         booksCount++;
-        System.out.println("Книга выдана. Сейчас на руках: " + booksCount + " кн.");
+        System.out.println("Kniga vydana. Seychas na rukakh: " + booksCount + " kn.");
     }
 
-    /**
-     * Вернуть книгу — уменьшает счётчик книг на 1.
-     * Валидация: нельзя вернуть книгу, если на руках их нет.
-     */
+    
     public void returnBook() {
         if (booksCount <= 0) {
-            System.out.println("Ошибка: нет книг для возврата");
+            System.out.println("Oshibka: net knig dlya vozvrata");
             return;
         }
         booksCount--;
-        System.out.println("Книга возвращена. Сейчас на руках: " + booksCount + " кн.");
+        System.out.println("Kniga vozvrashchena. Seychas na rukakh: " + booksCount + " kn.");
     }
 
-    // Шаг 4. Проверка работы
+
     public static void main(String[] args) {
-        LibraryCard card = new LibraryCard("LC-001", "Аманов Самат");
+        LibraryCard card = new LibraryCard("LC-001", "Amanov Samat");
 
-        System.out.println("Абонемент: " + card.getCardNumber() + ", владелец: " + card.getOwnerName());
+        System.out.println("Abonement: " + card.getCardNumber() + ", vladelets: " + card.getOwnerName());
 
-        // берем 5 книг подряд, все должны пройти без ошибок
+        // berem 5 
         for (int j = 1; j <= 5; j++) {
             card.borrowBook();
         }
 
-        // а вот тут уже перебор - лимит сработает
+        // limit
         card.borrowBook();
 
-        // сдаем 2 книги обратно
+        // back 2 books
         card.returnBook();
         card.returnBook();
 
-        // ну и смотрим что в итоге осталось на руках
-        System.out.println("Итоговое количество книг на руках: " + card.getBooksCount());
+        // end
+        System.out.println("Itogovoe kolichestvo knig na rukakh: " + card.getBooksCount());
     }
 }
