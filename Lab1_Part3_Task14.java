@@ -1,48 +1,47 @@
 import java.util.Scanner;
 
 public class Lab1_Part3_Task14 {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        boolean continueInput = true;
+        Scanner sc = new Scanner(System.in);
+        boolean running = true;
 
-        System.out.println("--- Графические форматы файлов ---");
+        System.out.println("Zadacha 14 (Tip graficheskogo faila po nomeru):");
+        System.out.println("1 - BMP, 2 - GIF, 3 - JPG, 4 - PNG, 0 - vykhod");
 
-        while (continueInput) {
-            System.out.print("\nВведите число от 1 до 4 (или 0 для выхода): ");
+        while (running) {
+            System.out.print("Vvedite chislo ot 1 do 4: ");
 
-            // Защита от ввода нечисловых значений (букв, символов)
-            if (!scanner.hasNextInt()) {
-                System.out.println("Ошибка! Пожалуйста, введите целое число.");
-                scanner.next(); // Очистка некорректного ввода из буфера
+            if (!sc.hasNextInt()) {                  // zashchita ot vvoda teksta
+                System.out.println("Oshibka! Nuzhno vvesti tseloe chislo.");
+                sc.next();                           // ochistka nevernogo vvoda
                 continue;
             }
 
-            int number = scanner.nextInt();
+            int n = sc.nextInt();
 
-            // Оператор выбора switch
-            switch (number) {
-                case 0:
-                    System.out.println("Завершение работы программы.");
-                    continueInput = false;
-                    break;
+            switch (n) {
                 case 1:
-                    System.out.println("Тип файла: BMP (Bitmap)");
+                    System.out.println("Tip faila: BMP (Bitmap)");
                     break;
                 case 2:
-                    System.out.println("Тип файла: GIF (Graphics Interchange Format)");
+                    System.out.println("Tip faila: GIF (Graphics Interchange Format)");
                     break;
                 case 3:
-                    System.out.println("Тип файла: JPG / JPEG (Joint Photographic Experts Group)");
+                    System.out.println("Tip faila: JPG (JPEG)");
                     break;
                 case 4:
-                    System.out.println("Тип файла: PNG (Portable Network Graphics)");
+                    System.out.println("Tip faila: PNG (Portable Network Graphics)");
+                    break;
+                case 0:
+                    System.out.println("Zavershenie raboty programmy.");
+                    running = false;
                     break;
                 default:
-                    System.out.println("Неверное число! Повторите ввод (введите число от 1 до 4).");
-                    break;
+                    System.out.println("Nevernoe chislo! Dopustimo ot 1 do 4.");
             }
         }
 
-        scanner.close();
+        sc.close();
     }
 }
