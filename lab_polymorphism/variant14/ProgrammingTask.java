@@ -1,10 +1,10 @@
 package lab_polymorphism.variant14;
 
-// Задача по программированию: прогресс по пройденным автотестам
+// Zadacha po programmirovaniyu: progress po proydennym avtotestam
 public class ProgrammingTask extends CourseModule {
-    private final int totalTests;    // всего автотестов
-    private final int difficulty;    // сложность 1..3
-    private int passedTests;         // пройдено автотестов
+    private final int totalTests;    // vsego avtotestov
+    private final int difficulty;    // slozhnost 1..3
+    private int passedTests;         // proydeno avtotestov
 
     public ProgrammingTask(String title, int maxScore, int totalTests, int difficulty) {
         super(title, maxScore);
@@ -19,7 +19,7 @@ public class ProgrammingTask extends CourseModule {
     @Override
     public int estimateCompletionTime() {
         if (passedTests == totalTests) return 0;
-        // 60 мин на уровень сложности за оставшиеся тесты + 15 мин на код-ревью
+        // 60 min na uroven slozhnosti za ostavshiesya testy + 15 min na kod-revyu
         return 60 * difficulty * (totalTests - passedTests) / totalTests + 15;
     }
 
@@ -30,20 +30,20 @@ public class ProgrammingTask extends CourseModule {
 
     @Override
     public String checkProgress() {
-        return String.format("пройдено тестов %d/%d, сложность %d",
+        return String.format("proydeno testov %d/%d, slozhnost %d",
                 passedTests, totalTests, difficulty);
     }
 
     @Override
     public String getModuleType() {
-        return "Задача";
+        return "Zadacha";
     }
 
-    // Ещё одна перегрузка evaluate(): тесты + штраф за стиль кода
+    // Eshchyo odna peregruzka evaluate(): testy + shtraf za stil koda
     public String evaluate(int passed, int total, boolean codeStyleOk) {
         int points = getMaxScore() * passed / total;
-        if (!codeStyleOk) points -= getMaxScore() / 10;   // штраф 10%
-        return "тесты " + passed + "/" + total + (codeStyleOk ? "" : ", штраф за стиль")
+        if (!codeStyleOk) points -= getMaxScore() / 10;   // shtraf 10%
+        return "testy " + passed + "/" + total + (codeStyleOk ? "" : ", shtraf za stil")
                 + ": " + evaluate(Math.max(points, 0));
     }
 }

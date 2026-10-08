@@ -1,9 +1,9 @@
 package lab_polymorphism.variant14;
 
-// Абстрактный базовый класс модуля онлайн-курса
+// Abstraktnyy bazovyy klass modulya onlayn-kursa
 public abstract class CourseModule implements Trackable {
-    private final String title;   // название модуля
-    private int maxScore;         // максимальный балл за модуль
+    private final String title;   // nazvanie modulya
+    private int maxScore;         // maksimalnyy ball za modul
 
     protected CourseModule(String title, int maxScore) {
         this.title = title;
@@ -20,45 +20,45 @@ public abstract class CourseModule implements Trackable {
 
     public void setMaxScore(int maxScore) {
         if (maxScore <= 0) {
-            throw new IllegalArgumentException("Максимальный балл должен быть > 0");
+            throw new IllegalArgumentException("Maksimalnyy ball dolzhen byt > 0");
         }
         this.maxScore = maxScore;
     }
 
-    // Абстрактный метод: оставшееся время прохождения, мин
+    // Abstraktnyy metod: ostavsheesya vremya prokhozhdeniya, min
     public abstract int estimateCompletionTime();
 
-    // Абстрактный метод: тип модуля для вывода
+    // Abstraktnyy metod: tip modulya dlya vyvoda
     public abstract String getModuleType();
 
-    // Общий метод: вызывает переопределённые методы потомка (позднее связывание)
+    // Obshchiy metod: vyzyvaet pereopredelyonnye metody potomka (pozdnee svyazyvanie)
     public String getInfo() {
-        return String.format("[%s] %s | осталось ~%d мин | %s",
+        return String.format("[%s] %s | ostalos ~%d min | %s",
                 getModuleType(), title, estimateCompletionTime(), checkProgress());
     }
 
-    // Перегрузка evaluate(): баллы из maxScore
+    // Peregruzka evaluate(): bally iz maxScore
     public String evaluate(int points) {
         return evaluate(points, maxScore);
     }
 
-    // Перегрузка evaluate(): баллы из произвольного максимума
+    // Peregruzka evaluate(): bally iz proizvolnogo maksimuma
     public String evaluate(int points, int outOf) {
         if (points < 0 || points > outOf) {
-            throw new IllegalArgumentException("Баллы вне диапазона 0.." + outOf);
+            throw new IllegalArgumentException("Bally vne diapazona 0.." + outOf);
         }
         double percent = 100.0 * points / outOf;
         return String.format("%d/%d = %.1f%% -> %s", points, outOf, percent, toGrade(percent));
     }
 
-    // Перегрузка evaluate(): несколько попыток, засчитывается лучшая
+    // Peregruzka evaluate(): neskolko popytok, zaschityvaetsya luchshaya
     public String evaluate(int[] attempts) {
         int best = 0;
         for (int a : attempts) best = Math.max(best, a);
-        return "лучшая из " + attempts.length + " попыток: " + evaluate(best);
+        return "luchshaya iz " + attempts.length + " popytok: " + evaluate(best);
     }
 
-    // Перевод процентов в буквенную оценку
+    // Perevod protsentov v bukvennuyu otsenku
     protected static String toGrade(double percent) {
         if (percent >= 95) return "A";
         if (percent >= 90) return "A-";

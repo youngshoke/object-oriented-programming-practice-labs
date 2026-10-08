@@ -1,11 +1,11 @@
 package lab_polymorphism.variant14;
 
-// Интерактивный тест: прогресс по отвеченным вопросам
+// Interaktivnyy test: progress po otvechennym voprosam
 public class InteractiveQuiz extends CourseModule {
-    private final int questionCount;     // всего вопросов
+    private final int questionCount;     // vsego voprosov
     private final int minutesPerQuestion;
-    private int answered;                // отвечено вопросов
-    private int attemptsLeft;            // оставшиеся попытки
+    private int answered;                // otvecheno voprosov
+    private int attemptsLeft;            // ostavshiesya popytki
 
     public InteractiveQuiz(String title, int maxScore, int questionCount,
                            int minutesPerQuestion, int attempts) {
@@ -35,12 +35,12 @@ public class InteractiveQuiz extends CourseModule {
 
     @Override
     public String checkProgress() {
-        return String.format("отвечено %d из %d вопросов, попыток: %d",
+        return String.format("otvecheno %d iz %d voprosov, popytok: %d",
                 answered, questionCount, attemptsLeft);
     }
 
     @Override
     public String getModuleType() {
-        return "Тест";
+        return "Test";
     }
 }

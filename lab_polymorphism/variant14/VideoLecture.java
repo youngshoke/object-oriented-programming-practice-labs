@@ -1,10 +1,10 @@
 package lab_polymorphism.variant14;
 
-// Видеолекция: прогресс по просмотренным минутам
+// Videolektsiya: progress po prosmotrennym minutam
 public class VideoLecture extends CourseModule {
-    private final int videoMinutes;   // длительность видео
-    private int watchedMinutes;       // просмотрено минут
-    private double playbackSpeed;     // скорость воспроизведения
+    private final int videoMinutes;   // dlitelnost video
+    private int watchedMinutes;       // prosmotreno minut
+    private double playbackSpeed;     // skorost vosproizvedeniya
 
     public VideoLecture(String title, int maxScore, int videoMinutes, double playbackSpeed) {
         super(title, maxScore);
@@ -26,7 +26,7 @@ public class VideoLecture extends CourseModule {
 
     @Override
     public int estimateCompletionTime() {
-        // оставшееся видео с учётом скорости + 10 мин на конспект
+        // ostavsheesya video s uchyotom skorosti + 10 min na konspekt
         int left = (int) Math.ceil((videoMinutes - watchedMinutes) / playbackSpeed);
         return left == 0 ? 0 : left + 10;
     }
@@ -38,12 +38,12 @@ public class VideoLecture extends CourseModule {
 
     @Override
     public String checkProgress() {
-        return String.format("просмотрено %d из %d мин (%.0f%%)",
+        return String.format("prosmotreno %d iz %d min (%.0f%%)",
                 watchedMinutes, videoMinutes, getProgressPercent());
     }
 
     @Override
     public String getModuleType() {
-        return "Видеолекция";
+        return "Videolektsiya";
     }
 }

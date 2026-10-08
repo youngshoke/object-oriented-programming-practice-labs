@@ -1,7 +1,7 @@
 package lab_polymorphism.variant14;
 
-// Интерфейс - контракт отслеживания прогресса
+// Interfeys - kontrakt otslezhivaniya progressa
 public interface Trackable {
-    double getProgressPercent();   // доля выполнения, %
-    String checkProgress();        // текстовый отчёт о прогрессе
+    double getProgressPercent();   // dolya vypolneniya, %
+    String checkProgress();        // tekstovyy otchyot o progresse
 }
